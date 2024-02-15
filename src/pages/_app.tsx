@@ -1,7 +1,10 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 import "@/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
+import '@radix-ui/themes/styles.css';
 import {cn} from "@/lib/utils";
+import {Theme} from "@radix-ui/themes";
+import {ThemeProvider} from "@/components/theme-provider";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -10,12 +13,17 @@ export const fontSans = FontSans({
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className={cn(
-      "min-h-screen bg-background font-sans antialiased",
-      fontSans.variable
-    )}>
-      <Component {...pageProps} />
-    </div>
+    <ThemeProvider
+      attribute={"class"}
+      defaultTheme={"dark"}
+    >
+      <div className={cn(
+        "min-h-screen bg-zinc-900 font-sans antialiased",
+        fontSans.variable
+      )}>
+        <Component {...pageProps} />
+      </div>
+    </ThemeProvider>
   );
 };
 

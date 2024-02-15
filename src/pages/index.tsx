@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
               href="https://create.t3.gg/en/introduction"
               target="_blank"
             >
+              <Button>Hey</Button>
               <h3 className="text-2xl font-bold">Documentation →</h3>
               <div className="text-lg">
                 Learn more about Create T3 App, the libraries it uses, and how
