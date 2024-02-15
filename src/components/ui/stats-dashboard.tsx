@@ -3,77 +3,41 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { IoIosHeart } from "react-icons/io";
 import { IconType } from "react-icons";
+import { useGameStore } from "@/stores/gameStore";
+import { GiMuscleFat, GiOrbWand } from "react-icons/gi";
+import { FaRunning } from "react-icons/fa";
+import { Dashboard } from "@/components/Dashboard";
 
-export const StatsDashboard = ({
-  containerClassName,
-  animate = true,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
-  animate?: boolean;
-}) => {
-  const variants = {
-    initial: {
-      backgroundPosition: "0 50%",
-    },
-    animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
-    },
-  };
+export const StatsDashboard = () => {
+  const { stats } = useGameStore();
+
   return (
-    <div className={cn("relative p-[4px] group", containerClassName)}>
-      <motion.div
-        variants={animate ? variants : undefined}
-        initial={animate ? "initial" : undefined}
-        animate={animate ? "animate" : undefined}
-        transition={
-          animate
-            ? {
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }
-            : undefined
-        }
-        style={{
-          backgroundSize: animate ? "400% 400%" : undefined,
-        }}
-        className={cn(
-          "absolute inset-0 rounded-3xl z-[1] opacity-60 group-hover:opacity-100 blur-xl  transition duration-500",
-          " bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]",
-        )}
+    <Dashboard title={"Stats"} className={cn("left-5")}>
+      <Item
+        maxValue={"100"}
+        currentValue={stats?.health + ""}
+        name={"health"}
+        icon={<IoIosHeart className={"h-full w-full text-red-200"} />}
       />
-      <motion.div
-        variants={animate ? variants : undefined}
-        initial={animate ? "initial" : undefined}
-        animate={animate ? "animate" : undefined}
-        transition={
-          animate
-            ? {
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }
-            : undefined
-        }
-        style={{
-          backgroundSize: animate ? "400% 400%" : undefined,
-        }}
-        className={cn(
-          "absolute inset-0 rounded-3xl z-[1]",
-          "bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]",
-        )}
+      <Item
+        maxValue={"100"}
+        currentValue={stats?.speed + ""}
+        name={"speed"}
+        icon={<FaRunning className={"h-full w-full text-blue-200"} />}
       />
-      <div className={"relative z-10 flex flex-row gap-2"}>
-        <Item
-          maxValue={"100"}
-          currentValue={"50"}
-          name={"health"}
-          icon={<IoIosHeart className={"h-full w-full"} />}
-        />
-      </div>
-    </div>
+      <Item
+        maxValue={"100"}
+        currentValue={stats?.mana + ""}
+        name={"mana"}
+        icon={<GiOrbWand className={"h-full w-full text-amber-200"} />}
+      />
+      <Item
+        maxValue={"100"}
+        currentValue={stats?.strength + ""}
+        name={"strength"}
+        icon={<GiMuscleFat className={"h-full w-full text-emerald-200"} />}
+      />
+    </Dashboard>
   );
 };
 
@@ -89,12 +53,14 @@ const Item = (props: {
   return (
     <div
       className={
-        "rounded-3xl bg-zinc-900 aspect-square w-[100px] p-2 flex flex-col items-center justify-center"
+        "aspect-square w-[80px] p-2 flex flex-col items-center justify-center"
       }
     >
-      <div className={"w-[22px] h-auto aspect-square"}>{props.icon}</div>
-      <p className={"font-bold text-lg text-red-400"}>{props.currentValue}</p>
-      <p className={"text-[11px] text-gray-200"}>/ {props.maxValue}</p>
+      <div className={"flex flex-row gap-1"}>
+        <p className={"font-bold text-lg text-zinc-400"}>{props.currentValue}</p>
+        <div className={"w-[17px] h-auto aspect-square"}>{props.icon}</div>
+      </div>
+      <p className={"text-[11px] text-zinc-400 italic"}>{props.name}</p>
     </div>
   );
 };
