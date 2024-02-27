@@ -214,7 +214,8 @@ const Message = (props: {
       ? "flex flex-col items-end my-2"
       : "flex flex-col items-start my-2";
 
-  const bgColorClass = props.role === "user" ? "text-brand-primary/80" : "text-zinc-300";
+  const bgColorClass =
+    props.role === "user" ? "text-brand-primary/80" : "text-zinc-300";
 
   return (
     <div className={messageClass}>

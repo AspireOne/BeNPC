@@ -11,6 +11,9 @@
     "nc": "new-component"
   },
   "dependencies": {
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/app": "^5.0.7",
+    "@capacitor/ios": "^5.7.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/themes": "^2.0.3",
     "@t3-oss/env-nextjs": "^0.7.1",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
+    "@capacitor/cli": "^5.7.0",
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
