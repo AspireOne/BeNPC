@@ -7,6 +7,7 @@ import { Theme } from "@radix-ui/themes";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { reactQueryClient } from "@/lib/reactQueryClient";
+import { ChakraProvider } from '@chakra-ui/react'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ export const fontSans = FontSans({
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider attribute={"class"} defaultTheme={"dark"}>
+      <ChakraProvider>
       <QueryClientProvider client={reactQueryClient}>
         <div
           className={cn(
@@ -26,7 +27,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </div>
       </QueryClientProvider>
-    </ThemeProvider>
+      </ChakraProvider>
   );
 };
 
