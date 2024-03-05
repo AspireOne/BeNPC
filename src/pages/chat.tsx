@@ -140,6 +140,7 @@ export default () => {
 
         <div>
           {messages.map((message, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <Message key={index} role={message.role} content={message.content} />
           ))}
           {submitting && <Loading />}
